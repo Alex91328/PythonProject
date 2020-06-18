@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quote Dashboard</title>
+</head>
+
+<body>
+    <a href="/myaccount/{{user.id}}">Edit My Account</a>
+    <a href="/logout"><button>LogOut</button></a>
+    <h1>Welcome {{ user.first_name }}!</h1>
+    <table style="width:50%">
+        <h3>Add a Quote!</h3>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/post_message" method="POST">
+            {% csrf_token %}
+            <tr>
+                <th>Author</th>
+                <td><input type="text" name="author" required></textarea></td>
+            </tr>
+            <tr>
+                <th>Quote</th>
+                <td><textarea type="text" name="quote" cols="30" rows="4" required></textarea> </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </form>
+    </table>
+    {% for author in all_the_authors reversed %}
+    <p>{{ author.author }}:"{{author.quote}}" Posted By <a href="/user/{{author.id}}">{{author.user.first_name}}
+            {{author.user.last_name}}</a>
+        {% if author.user.id == user.id %}
+        <a href='/message/{{author.id}}/delete'>Delete</a> </p>
+    {% endif %}
+    {% endfor %}
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Edit Account</title>
+</head>
+
+<body>
+    <h1>Edit My Account</h1>
+    <table style="width:50%"><a href="/quotes">Back</a><a href="/logout"><button>Logout</button></a>
+        <form action="/account/{{user.id}}/update" method="POST">
+            {% csrf_token %}
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="first_name" value="{{user.first_name}}" /></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="last_name" value="{{user.last_name}}" /></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" name="email" value="{{user.email}}" /></td>
+            </tr>
+            <tr>
+                <th>
+                <td>
+                    <button type="submit">Update</button>
+                </td>
+                </th>
+            </tr>
+        </form>
+    </table>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+
+</html>

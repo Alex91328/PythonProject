@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A Web Page</title>
+</head>
+
+<body>
+    <h1>Registration</h1>
+    <table style="width:50%">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/users/create" method="POST">
+            {% csrf_token %}
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="first_name" /></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="last_name" /></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" name="email" /></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" /></td>
+            </tr>
+            <tr>
+                <th>Confirm PW</th>
+                <td><input type="password" name="confirm_pw" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="submit">Register</button></td>
+            </tr>
+        </form>
+    </table>
+    <h1>Log-in</h1>
+    <table style="width:50%">
+
+        <form action="/users/login" method="POST">
+            {% csrf_token %}
+            <tr>
+                <th>Email</th>
+                <td><input type="email" name="email" /></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="submit">Log in</button></td>
+            </tr>
+        </form>
+    </table>
+
+
+</body>
+
+</html>

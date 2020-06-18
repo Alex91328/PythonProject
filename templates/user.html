@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Quotes</title>
+</head>
+
+<body>
+    <a href="/quotes">Back</a> <a href="/logout"><button>LogOut</button></a>
+    {{ author.user.first_name }} {{ author.user.last_name }} Quotes {{author.quote}} by {{author.author}}
+    {% for quote in author.quotes.all %}
+    <p>{{author.quote}}</p>
+    {% endfor %}
+</body>
+
+</html>
